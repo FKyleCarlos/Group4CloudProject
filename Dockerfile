@@ -12,8 +12,6 @@ COPY All_Diets.csv .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN npm install -g azurite
-
 RUN mkdir -p /azurite/data
 
 EXPOSE 10000 10001 10002
