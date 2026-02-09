@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    container_name: azurite
+    ports:
+      - "10000:10000"
+    command: azurite-blob --blobHost 0.0.0.0
+    volumes:
+      - azurite-data:/data
+
+  app:
+    build: .
+    environment:
+      AZURE_STORAGE_CONNECTION_STRING: >
+        DefaultEndpointsProtocol=http;
+        AccountName=devstoreaccount1;
+        AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;
+        BlobEndpoint=http://azurite:10000/devstoreaccount1;
+      CONTAINER_NAME: datasets
+      BLOB_NAME: All_Diets.csv
+    depends_on:
+      - azurite
+
+volumes:
+  azurite-data:
