@@ -1,0 +1,4 @@
+azure.storage.blob==12.26.0
+pandas==2.1.0
+matplotlib==0.12.3
+seaborn==0.12.3
